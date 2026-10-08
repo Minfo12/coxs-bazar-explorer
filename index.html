@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cox's Bazar Explorer — Discover Beyond The Beach</title>
+<meta name="description" content="Explore Cox's Bazar — beaches, islands, hills, heritage and hidden gems.">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="#home"><span>🌊</span> Cox's Bazar <b>Explorer</b></a>
+  <nav><a href="#explore">Explore</a><a href="#map">Map</a><a href="#about">About</a></nav>
+</header>
+
+<main>
+<section id="home" class="hero">
+  <div class="hero-copy">
+    <span class="eyebrow">BANGLADESH • COX'S BAZAR</span>
+    <h1>Discover<br><em>Beyond The Beach.</em></h1>
+    <p>সমুদ্রের বাইরেও কক্সবাজারের পাহাড়, দ্বীপ, বন, ঐতিহ্য ও hidden gems আবিষ্কার করুন।</p>
+    <div class="hero-actions"><a class="btn primary" href="#explore">Explore Now ↓</a><a class="btn ghost" href="#map">Open Map</a></div>
+  </div>
+  <div class="hero-card"><div class="big">১০</div><div>উপজেলা</div><hr><div class="big">৭১</div><div>ইউনিয়ন</div><hr><div class="big" id="spotCount">0+</div><div>Curated destinations</div></div>
+</section>
+
+<section class="stats">
+  <div><b>🏖️</b><span>Beaches</span></div><div><b>🏝️</b><span>Islands</span></div><div><b>⛰️</b><span>Hills</span></div><div><b>🌳</b><span>Nature</span></div><div><b>🧭</b><span>Hidden Gems</span></div>
+</section>
+
+<section id="explore" class="section">
+  <div class="section-head"><div><span class="eyebrow">EXPLORE</span><h2>Find your next destination</h2></div><p>উপজেলা, category বা নাম দিয়ে খুঁজুন।</p></div>
+  <div class="filters">
+    <input id="search" placeholder="🔎  জায়গার নাম লিখুন...">
+    <select id="upazila"><option value="">সব উপজেলা</option></select>
+    <select id="category"><option value="">সব ক্যাটাগরি</option></select>
+    <select id="type"><option value="">সব</option><option value="popular">Popular</option><option value="hidden">Hidden Gem</option><option value="candidate">Needs Verification</option></select>
+  </div>
+  <div id="cards" class="grid"></div>
+</section>
+
+<section id="mapSection" class="section map-wrap">
+  <div class="section-head"><div><span class="eyebrow">INTERACTIVE MAP</span><h2 id="map">Explore on map</h2></div><p>মার্কার চাপলে জায়গার তথ্য দেখুন।</p></div>
+  <div id="mapBox"></div>
+</section>
+
+<section id="about" class="about">
+  <span class="eyebrow">THE PROJECT</span>
+  <h2>কক্সবাজারকে শুধু সৈকত হিসেবে নয়—<br><em>একটি সম্পূর্ণ destination হিসেবে দেখুন।</em></h2>
+  <p>এই project-এর লক্ষ্য হলো কক্সবাজারের ১০ উপজেলা ও ৭১ ইউনিয়নের পর্যটন, প্রকৃতি, ঐতিহ্য এবং কম-পরিচিত জায়গাগুলোকে একটি ব্যবহারবান্ধব digital map ও travel guide-এ আনা।</p>
+  <div class="notice">⚠️ <b>Verification:</b> “Hidden” বা “Needs Verification” চিহ্নিত স্থান ভ্রমণের আগে স্থানীয় কর্তৃপক্ষ/স্থানীয় গাইডের মাধ্যমে পথ, নিরাপত্তা ও প্রবেশাধিকার যাচাই করুন।</div>
+</section>
+</main>
+
+<footer>© 2026 Cox's Bazar Explorer • Built as a free MVP</footer>
+<div id="modal" class="modal"><div class="modal-box"><button onclick="closeModal()">×</button><div id="modalContent"></div></div></div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="data.js"></script><script src="app.js"></script>
+</body></html>
