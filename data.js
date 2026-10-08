@@ -321,4 +321,53 @@ const destinations = [
     upazila: "কক্সবাজার সদর",
     category: "Nature",
     type: "popular",
-    description: "পাহাড়, সমুদ্র ও উপকূলীয় প্র
+    description: "পাহাড়, সমুদ্র ও উপকূলীয় প্রাকৃতিক দৃশ্যের জন্য পরিচিত এলাকা।",
+    location: "কক্সবাজার সদর",
+    lat: 21.3700,
+    lng: 92.0200,
+    best: "বিকেল",
+    safety: "পাহাড়ি এলাকায় একা না যাওয়াই ভালো।"
+  },
+  {
+    id: 23,
+    name: "Kolatur Chora Area",
+    bn: "কলাতলী–সংলগ্ন প্রাকৃতিক এলাকা",
+    upazila: "কক্সবাজার সদর",
+    category: "Nature",
+    type: "candidate",
+    description: "শহরের কাছাকাছি সম্ভাব্য স্থানীয় প্রকৃতি ও ছোট পর্যটন স্পট যাচাইয়ের জন্য রাখা হয়েছে।",
+    location: "কক্সবাজার সদর",
+    lat: 21.4100,
+    lng: 91.9900,
+    best: "দিনের সময়",
+    safety: "প্রকাশের আগে নির্দিষ্ট স্থান ও প্রবেশাধিকার যাচাই করুন।"
+  },
+  {
+    id: 24,
+    name: "Marine Drive Viewpoint",
+    bn: "মেরিন ড্রাইভ ভিউপয়েন্ট",
+    upazila: "উখিয়া",
+    category: "Viewpoint",
+    type: "hidden",
+    description: "মেরিন ড্রাইভের বিভিন্ন জায়গা থেকে সমুদ্র ও পাহাড়ের দৃশ্য দেখা যায়।",
+    location: "উখিয়া",
+    lat: 21.2700,
+    lng: 92.0400,
+    best: "সূর্যাস্ত",
+    safety: "রাস্তার পাশে গাড়ি থামানোর ক্ষেত্রে সতর্ক থাকুন।"
+  },
+  {
+    id: 25,
+    name: "Baharchhara Coastal Area",
+    bn: "বাহারছড়া উপকূলীয় এলাকা",
+    upazila: "টেকনাফ",
+    category: "Beach",
+    type: "candidate",
+    description: "টেকনাফের বাহারছড়া অঞ্চলের উপকূলীয় প্রকৃতি পর্যটন সম্ভাবনার অংশ হিসেবে তালিকাভুক্ত।",
+    location: "টেকনাফ",
+    lat: 20.9500,
+    lng: 92.2200,
+    best: "শীতকাল",
+    safety: "স্থানীয় নির্দেশনা মেনে চলুন।"
+  }
+];
