@@ -1,4 +1,5 @@
-let map;
+
+let map = null;
 let markers = [];
 
 const searchInput = document.getElementById("search");
@@ -9,25 +10,42 @@ const cards = document.getElementById("cards");
 const spotCount = document.getElementById("spotCount");
 
 function init() {
+
   populateFilters();
+
+  // প্রথমেই জায়গাগুলো দেখাবে
   renderDestinations(destinations);
-  initMap();
 
   if (spotCount) {
     spotCount.textContent = destinations.length + "+";
   }
 
+  // Search আগে চালু হবে
   searchInput.addEventListener("input", applyFilters);
   upazilaSelect.addEventListener("change", applyFilters);
   categorySelect.addEventListener("change", applyFilters);
   typeSelect.addEventListener("change", applyFilters);
+
+  // Map আলাদাভাবে চালু হবে
+  try {
+    initMap();
+  } catch (error) {
+    console.log("Map error:", error);
+  }
 }
 
-function populateFilters() {
-  const uniqueUpazilas = [...new Set(destinations.map(d => d.upazila))].sort();
-  const categories = [...new Set(destinations.map(d => d.category))].sort();
 
-  uniqueUpazilas.forEach(name => {
+function populateFilters() {
+
+  const upazilas = [...new Set(
+    destinations.map(place => place.upazila)
+  )].sort();
+
+  const categories = [...new Set(
+    destinations.map(place => place.category)
+  )].sort();
+
+  upazilas.forEach(name => {
     const option = document.createElement("option");
     option.value = name;
     option.textContent = name;
@@ -42,68 +60,83 @@ function populateFilters() {
   });
 }
 
+
 function applyFilters() {
-  const search = searchInput.value.toLowerCase().trim();
+
+  const search = searchInput.value
+    .toLowerCase()
+    .trim();
+
   const upazila = upazilaSelect.value;
   const category = categorySelect.value;
   const type = typeSelect.value;
 
   const filtered = destinations.filter(place => {
-    const text = (
-      place.name +
-      " " +
-      place.bn +
-      " " +
-      place.description +
-      " " +
-      place.location
-    ).toLowerCase();
 
-    const matchesSearch = !search || text.includes(search);
-    const matchesUpazila = !upazila || place.upazila === upazila;
-    const matchesCategory = !category || place.category === category;
-    const matchesType = !type || place.type === type;
+    const text = `
+      ${place.name}
+      ${place.bn}
+      ${place.description}
+      ${place.location}
+      ${place.upazila}
+      ${place.category}
+    `.toLowerCase();
 
     return (
-      matchesSearch &&
-      matchesUpazila &&
-      matchesCategory &&
-      matchesType
+      (!search || text.includes(search)) &&
+      (!upazila || place.upazila === upazila) &&
+      (!category || place.category === category) &&
+      (!type || place.type === type)
     );
   });
 
   renderDestinations(filtered);
-  updateMap(filtered);
+
+  try {
+    updateMap(filtered);
+  } catch (error) {
+    console.log("Map update error:", error);
+  }
 }
 
+
 function renderDestinations(list) {
+
   if (!list.length) {
+
     cards.innerHTML = `
-      <div class="card" style="grid-column:1/-1;text-align:center">
+      <div class="card"
+           style="grid-column:1/-1;text-align:center">
         <h3>কোনো জায়গা পাওয়া যায়নি</h3>
-        <p>Search বা filter পরিবর্তন করে আবার চেষ্টা করুন।</p>
+        <p>অন্য নাম দিয়ে চেষ্টা করুন।</p>
       </div>
     `;
+
     return;
   }
 
   cards.innerHTML = list.map(place => {
-    let tagText = "Popular";
+
+    let tag = "Popular";
     let tagClass = "";
 
     if (place.type === "hidden") {
-      tagText = "Hidden Gem";
+      tag = "Hidden Gem";
       tagClass = "hidden";
     }
 
     if (place.type === "candidate") {
-      tagText = "Needs Verification";
+      tag = "Needs Verification";
       tagClass = "candidate";
     }
 
     return `
-      <article class="card" onclick="openModal(${place.id})">
-        <span class="tag ${tagClass}">${tagText}</span>
+      <article class="card"
+               onclick="openModal(${place.id})">
+
+        <span class="tag ${tagClass}">
+          ${tag}
+        </span>
 
         <h3>${place.bn}</h3>
 
@@ -113,32 +146,49 @@ function renderDestinations(list) {
           <span>📍 ${place.upazila}</span>
           <span>🏷️ ${place.category}</span>
         </div>
+
       </article>
     `;
+
   }).join("");
 }
 
+
 function initMap() {
-  map = L.map("mapBox").setView([21.4272, 91.9770], 9);
+
+  if (typeof L === "undefined") {
+    console.log("Leaflet not loaded");
+    return;
+  }
+
+  map = L.map("mapBox").setView(
+    [21.4272, 91.9770],
+    9
+  );
 
   L.tileLayer(
     "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
     {
-      attribution:
-        '&copy; OpenStreetMap contributors'
+      attribution: "&copy; OpenStreetMap contributors"
     }
   ).addTo(map);
 
   updateMap(destinations);
 }
 
+
 function updateMap(list) {
+
   if (!map) return;
 
-  markers.forEach(marker => map.removeLayer(marker));
+  markers.forEach(marker => {
+    map.removeLayer(marker);
+  });
+
   markers = [];
 
   list.forEach(place => {
+
     const marker = L.marker([
       place.lat,
       place.lng
@@ -147,7 +197,8 @@ function updateMap(list) {
     marker.bindPopup(`
       <strong>${place.bn}</strong><br>
       ${place.category}<br>
-      <button class="popup-btn" onclick="openModal(${place.id})">
+      <button class="popup-btn"
+              onclick="openModal(${place.id})">
         বিস্তারিত দেখুন
       </button>
     `);
@@ -156,10 +207,19 @@ function updateMap(list) {
   });
 
   if (list.length === 1) {
-    map.setView([list[0].lat, list[0].lng], 13);
+
+    map.setView(
+      [list[0].lat, list[0].lng],
+      13
+    );
+
   } else if (list.length > 1) {
+
     const bounds = L.latLngBounds(
-      list.map(place => [place.lat, place.lng])
+      list.map(place => [
+        place.lat,
+        place.lng
+      ])
     );
 
     map.fitBounds(bounds, {
@@ -168,13 +228,20 @@ function updateMap(list) {
   }
 }
 
+
 function openModal(id) {
-  const place = destinations.find(item => item.id === id);
+
+  const place = destinations.find(
+    item => item.id === id
+  );
 
   if (!place) return;
 
-  const modal = document.getElementById("modal");
-  const content = document.getElementById("modalContent");
+  const modal =
+    document.getElementById("modal");
+
+  const content =
+    document.getElementById("modalContent");
 
   let status = "⭐ Popular";
 
@@ -228,46 +295,49 @@ function openModal(id) {
 
     </div>
 
-    <div class="notice" style="
-      margin-top:18px;
-      background:#f5f7f4;
-      color:#39483f;
-      border:1px solid #dce5df;
-    ">
+    <div class="notice"
+         style="margin-top:18px;background:#f5f7f4;color:#39483f;border:1px solid #dce5df;">
       ⚠️ ${place.safety}
     </div>
 
-    <a
-      href="${mapsUrl}"
-      target="_blank"
-      rel="noopener"
-      class="btn primary"
-      style="
-        display:inline-block;
-        margin-top:20px;
-      "
-    >
-      📍 Google Maps
+    <a href="${mapsUrl}"
+       target="_blank"
+       rel="noopener"
+       class="btn primary"
+       style="display:inline-block;margin-top:20px;">
+       📍 Google Maps
     </a>
   `;
 
   modal.classList.add("show");
 }
 
+
 function closeModal() {
-  document.getElementById("modal").classList.remove("show");
+  document
+    .getElementById("modal")
+    .classList.remove("show");
 }
 
-document.getElementById("modal").addEventListener("click", function(e) {
-  if (e.target === this) {
-    closeModal();
-  }
-});
+
+document
+  .getElementById("modal")
+  .addEventListener("click", function(e) {
+
+    if (e.target === this) {
+      closeModal();
+    }
+
+  });
+
 
 document.addEventListener("keydown", function(e) {
+
   if (e.key === "Escape") {
     closeModal();
   }
+
 });
+
 
 init();
