@@ -254,8 +254,7 @@ function openModal(id) {
   }
 
   const mapsUrl =
-    `https://www.google.com/maps/search/?api=1&query=${place.lat},${place.lng}`;
-
+  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.name + " " + place.upazila + " Cox's Bazar Bangladesh")}`;
   content.innerHTML = `
     <span class="tag ${
       place.type === "hidden"
