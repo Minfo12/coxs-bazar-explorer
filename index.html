@@ -1,81 +1,152 @@
 <!doctype html>
 <html lang="bn">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Cox's Bazar Explorer — Discover Beyond The Beach</title>
-<meta name="description" content="Explore Cox's Bazar — beaches, islands, hills, heritage and hidden gems.">
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Cox's Bazar Explorer — Discover Beyond The Beach</title>
+  <meta name="description" content="Explore Cox's Bazar — beaches, islands, hills, heritage and hidden gems.">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 </head>
+
 <body>
-<header class="nav">
-  <a class="brand" href="#home"><span>🌊</span> Cox's Bazar <b>Explorer</b></a>
-  <nav><a href="#explore">Explore</a><a href="#map">Map</a><a href="#about">About</a></nav>
-</header>
+  <header class="nav">
+    <a class="brand" href="#home">
+      <span>🌊</span> Cox's Bazar <b>Explorer</b>
+    </a>
 
-<main>
-<section id="home" class="hero">
-  <div class="hero-copy">
-    <span class="eyebrow">BANGLADESH • COX'S BAZAR</span>
-    <h1>Discover<br><em>Beyond The Beach.</em></h1>
-    <p>সমুদ্রের বাইরেও কক্সবাজারের পাহাড়, দ্বীপ, বন, ঐতিহ্য ও hidden gems আবিষ্কার করুন।</p>
-    <div class="hero-actions"><a class="btn primary" href="#explore">Explore Now ↓</a><a class="btn ghost" href="#map">Open Map</a></div>
-  </div>
-  <div class="hero-card"><div class="big">১০</div><div>উপজেলা</div><hr><div class="big">৭১</div><div>ইউনিয়ন</div><hr><div class="big" id="spotCount">0+</div><div>Curated destinations</div></div>
-</section>
+    <nav>
+      <a href="#explore">Explore</a>
+      <a href="#map">Map</a>
+      <a href="#about-developer">About</a>
+    </nav>
+  </header>
 
-<section class="stats">
-  <div><b>🏖️</b><span>Beaches</span></div><div><b>🏝️</b><span>Islands</span></div><div><b>⛰️</b><span>Hills</span></div><div><b>🌳</b><span>Nature</span></div><div><b>🧭</b><span>Hidden Gems</span></div>
-</section>
+  <main>
+    <section id="home" class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow">BANGLADESH • COX'S BAZAR</span>
 
-<section id="explore" class="section">
-  <div class="section-head"><div><span class="eyebrow">EXPLORE</span><h2>Find your next destination</h2></div><p>উপজেলা, category বা নাম দিয়ে খুঁজুন।</p></div>
-  <div class="filters">
-    <input id="search" placeholder="🔎  জায়গার নাম লিখুন...">
-    <select id="upazila"><option value="">সব উপজেলা</option></select>
-    <select id="category"><option value="">সব ক্যাটাগরি</option></select>
-    <select id="type"><option value="">সব</option><option value="popular">Popular</option><option value="hidden">Hidden Gem</option><option value="candidate">Needs Verification</option></select>
-  </div>
-  <div id="cards" class="grid"></div>
-</section>
+        <h1>Discover<br><em>Beyond The Beach.</em></h1>
 
-<section id="mapSection" class="section map-wrap">
-  <div class="section-head"><div><span class="eyebrow">INTERACTIVE MAP</span><h2 id="map">Explore on map</h2></div><p>মার্কার চাপলে জায়গার তথ্য দেখুন।</p></div>
-  <div id="mapBox"></div>
-</section>
+        <p>
+          সমুদ্রের বাইরেও কক্সবাজারের পাহাড়, দ্বীপ, বন,
+          ঐতিহ্য ও hidden gems আবিষ্কার করুন।
+        </p>
 
-<section id="about-developer" class="developer-section">
-  <h2>About the Developer</h2>
+        <div class="hero-actions">
+          <a class="btn primary" href="#explore">Explore Now ↓</a>
+          <a class="btn ghost" href="#map">Open Map</a>
+        </div>
+      </div>
 
-  <div class="developer-profile">
-    <img
-      src="./mamun.jpg"
-      alt="Mamun - Developer of Cox's Bazar Explorer"
-      class="developer-photo"
-    />
+      <div class="hero-card">
+        <div class="big">১০</div>
+        <div>উপজেলা</div>
+        <hr>
+        <div class="big">৭১</div>
+        <div>ইউনিয়ন</div>
+        <hr>
+        <div class="big" id="spotCount">0+</div>
+        <div>Curated destinations</div>
+      </div>
+    </section>
 
-    <div>
-      <h3>Mamun</h3>
-      <p>Founder &amp; Developer</p>
-      <p>
-        Cox's Bazar Explorer-এর মাধ্যমে কক্সবাজারের
-        পরিচিত পর্যটন স্থান ও নতুন ভ্রমণ গন্তব্যগুলো
-        সবার কাছে তুলে ধরার একটি উদ্যোগ।
-      </p>
+    <section class="stats">
+      <div><b>🏖️</b><span>Beaches</span></div>
+      <div><b>🏝️</b><span>Islands</span></div>
+      <div><b>⛰️</b><span>Hills</span></div>
+      <div><b>🌳</b><span>Nature</span></div>
+      <div><b>🧭</b><span>Hidden Gems</span></div>
+    </section>
+
+    <section id="explore" class="section">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">EXPLORE</span>
+          <h2>Find your next destination</h2>
+        </div>
+        <p>উপজেলা, category বা নাম দিয়ে খুঁজুন।</p>
+      </div>
+
+      <div class="filters">
+        <input id="search" type="search" placeholder="🔎 জায়গার নাম লিখুন..." aria-label="জায়গার নাম দিয়ে খুঁজুন">
+
+        <select id="upazila" aria-label="উপজেলা নির্বাচন">
+          <option value="">সব উপজেলা</option>
+        </select>
+
+        <select id="category" aria-label="ক্যাটাগরি নির্বাচন">
+          <option value="">সব ক্যাটাগরি</option>
+        </select>
+
+        <select id="type" aria-label="জায়গার ধরন নির্বাচন">
+          <option value="">সব</option>
+          <option value="popular">Popular</option>
+          <option value="hidden">Hidden Gem</option>
+          <option value="candidate">Needs Verification</option>
+        </select>
+      </div>
+
+      <div id="cards" class="grid">
+        <p>জায়গার তথ্য লোড হচ্ছে...</p>
+      </div>
+    </section>
+
+    <section id="mapSection" class="section map-wrap">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">INTERACTIVE MAP</span>
+          <h2 id="map">Explore on map</h2>
+        </div>
+        <p>মার্কার চাপলে জায়গার তথ্য দেখুন।</p>
+      </div>
+
+      <div id="mapBox"></div>
+    </section>
+
+    <section id="about-developer" class="developer-section">
+      <h2>About the Developer</h2>
+
+      <div class="developer-profile">
+        <img
+          src="./mamun.jpg"
+          alt="Mamun - Developer of Cox's Bazar Explorer"
+          class="developer-photo"
+        >
+
+        <div>
+          <h3>Mamun</h3>
+          <p>Founder &amp; Developer</p>
+          <p>
+            Cox's Bazar Explorer-এর মাধ্যমে কক্সবাজারের
+            পরিচিত পর্যটন স্থান ও নতুন ভ্রমণ গন্তব্যগুলো
+            সবার কাছে তুলে ধরার একটি উদ্যোগ।
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <img src="./mamun.jpg" alt="Mamun" class="footer-photo">
+      <p>Developed by <strong>Mamun</strong></p>
+      <p>Cox's Bazar Explorer</p>
+    </footer>
+  </main>
+
+  <!-- Destination details popup -->
+  <div id="modal" class="modal">
+    <div class="modal-box">
+      <button type="button" onclick="closeModal()" aria-label="বন্ধ করুন">×</button>
+      <div id="modalContent"></div>
     </div>
   </div>
-</section>
 
-<footer class="site-footer">
-  <img src="./mamun.jpg" alt="Mamun" class="footer-photo" />
-  <p>Developed by <strong>Mamun</strong></p>
-  <p>Cox's Bazar Explorer</p>
-</footer>
-</main>
-
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="data.js"></script>
-<script src="app.js"></script>
+  <!-- Load libraries and data before the app -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="./data.js"></script>
+  <script src="./app.js"></script>
 </body>
 </html>
